@@ -15,7 +15,7 @@ nasa_api_url = "https://api.nasa.gov/neo/"
 
 # Getting todays date
 dt = datetime.now()
-request_date = str(dt.year) + "-" + str(dt.month).zfill(2) + "-" + str(dt.day).zfill(2)  #str - string in python, zfil - zerofill, piemçram,  lai mçneða vçrtîba bûtu divu skaitïu gara vienmçr
+request_date = str(dt.year) + "-" + str(dt.month).zfill(2) + "-" + str(dt.day).zfill(2)  #str - string in python, zfil - zerofill, piemeram,  lai mçneða vçrtîba bûtu divu skaitïu gara vienmçr
 print("Generated today's date: " + str(request_date))
 
 
