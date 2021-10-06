@@ -6,7 +6,6 @@ import os
 import time
 from datetime import datetime
 
-
 from configparser import ConfigParser
 from mysql.connector import Error
 
@@ -56,6 +55,7 @@ def get_cursor():
 		connection = init_db()
 		connection.commit()
 	return connection.cursor()
+
 
 # Opening connection to mysql DB
 logger.info('Connecting to MySQL DB')
@@ -165,7 +165,7 @@ migrations_list.sort(reverse=False)
 counter = 0
 
 for migration in migrations_list:
-	if mysql_check_if_migration_exists(migration) == 0:
+	if mysql_check_if_migration_exists(migration) == 0: #vai statusa kods ir 0 (labs)
 		with open(cur_dir + "/migrations/" + migration,'r') as file:
 			migration_sql = file.read()
 			logger.debug(migration_sql)
@@ -173,7 +173,7 @@ for migration in migrations_list:
 			if mysql_exec_any_sql(migration_sql) == 0:
 				mig_exec_ts = int(time.time())
 				mig_exec_dt = datetime.utcfromtimestamp(mig_exec_ts).strftime('%Y-%m-%d %H:%M:%S')
-				mysql_migration_value_insert(migration, mig_exec_ts, mig_exec_dt)
+				mysql_migration_value_insert(migration, mig_exec_ts, mig_exec_dt) 
 				logger.info("OK")
 				counter += 1
 			else:
