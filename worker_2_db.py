@@ -25,11 +25,11 @@ logger.info('Asteroid processing service')
 # Initiating and reading config values
 logger.info('Loading configuration from file')
 
-try: 
+try:
 	config = ConfigParser()
 	config.read('config.ini')
 
-	nasa_api_key = config.get('nasa', 'api_key') # Nasa atslega
+	nasa_api_key = config.get('nasa', 'api_key')
 	nasa_api_url = config.get('nasa', 'api_url')
 
 	mysql_config_mysql_host = config.get('mysql_config', 'mysql_host')
@@ -45,7 +45,7 @@ logger.info('DONE')
 connection = None
 connected = False
 
-def init_db(): # 
+def init_db():
 	global connection
 	connection = mysql.connector.connect(host=mysql_config_mysql_host, database=mysql_config_mysql_db, user=mysql_config_mysql_user, password=mysql_config_mysql_pass)
 
@@ -113,7 +113,7 @@ def push_asteroids_arrays_to_db(request_day, ast_array, hazardous):
 		else:
 			logger.debug("Asteroid already IN DB")
 
-# Getting todays date 
+# Getting todays date
 dt = datetime.now()
 request_date = str(dt.year) + "-" + str(dt.month).zfill(2) + "-" + str(dt.day).zfill(2)  
 logger.debug("Generated today's date: " + str(request_date))
@@ -135,7 +135,7 @@ if r.status_code == 200:
 	ast_safe = []
 	ast_hazardous = []
 
-	if 'element_count' in json_data:  
+	if 'element_count' in json_data:
 		ast_count = int(json_data['element_count'])
 		logger.info("Asteroid count today: " + str(ast_count))
 
@@ -196,7 +196,7 @@ if r.status_code == 200:
 					logger.debug("Speed: " + str(tmp_ast_speed) + " km/h" + " | MISS distance: " + str(tmp_ast_miss_dist) + " km")
 					
 					# Adding asteroid data to the corresponding array
-					if tmp_ast_hazardous == True: 
+					if tmp_ast_hazardous == True:
 						ast_hazardous.append([tmp_ast_name, tmp_ast_nasa_jpl_url, tmp_ast_diam_min, tmp_ast_diam_max, tmp_ast_close_appr_ts, tmp_ast_close_appr_dt_utc, tmp_ast_close_appr_dt, tmp_ast_speed, tmp_ast_miss_dist, tmp_ast_id])
 					else:
 						ast_safe.append([tmp_ast_name, tmp_ast_nasa_jpl_url, tmp_ast_diam_min, tmp_ast_diam_max, tmp_ast_close_appr_ts, tmp_ast_close_appr_dt_utc, tmp_ast_close_appr_dt, tmp_ast_speed, tmp_ast_miss_dist, tmp_ast_id])
