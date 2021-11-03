@@ -16,7 +16,7 @@ with open('./log_worker.yaml', 'r') as stream:
 
 logging.config.dictConfig(config)
 
-# Creating logger
+# Creating logger 
 logger = logging.getLogger('root')
 
 logger.info('Asteroid processing service')
