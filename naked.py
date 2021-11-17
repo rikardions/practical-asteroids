@@ -57,7 +57,7 @@ if r.status_code == 200:
 	ast_safe = []
 	ast_hazardous = []
 
-# Asteroid cont print
+# Asteroid count print
 	if 'element_count' in json_data:
 		ast_count = int(json_data['element_count'])
 		logger.info("Asteroid count today: " + str(ast_count))
